@@ -18,7 +18,7 @@ public class DemoApplication {
         StringBuilder s = new StringBuilder("Hello World!\n\nMy peers are:\n")
 
         for(int i = 0; i < peers.length; i++) {
-            s.append("    " + peers[i].getHostAddress() + "\n")
+            s.append("    " + peers[i].getHostAddress() + "\n");
         }
 
         s.append("\n\n");
