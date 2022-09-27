@@ -22,7 +22,7 @@ RUN mvn package -Dmaven.test.skip=true
 
 FROM ubi8/openjdk-11
 USER 0 
-RUN microdnf install -y bindutils
+RUN microdnf install -y bind-utils
 COPY --from=0 /build/target/demo-0.0.1-SNAPSHOT.jar /app/target/demo-0.0.1-SNAPSHOT.jar
 USER 1001
 EXPOSE 8081
