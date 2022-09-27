@@ -25,6 +25,7 @@ public class DemoApplication {
         StringBuilder s = new StringBuilder("Hello World!\n\n");
         
         if (peers != null) {
+            s.append("Including myself, I have " + peers.length + " peers.\n");
             s.append("My peers are:\n");
 
 
