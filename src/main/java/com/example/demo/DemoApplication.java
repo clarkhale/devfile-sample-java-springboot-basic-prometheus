@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +15,14 @@ public class DemoApplication {
 
     @RequestMapping("/")
     String home() {
-        InetAddress[] peers = InetAddress.getAllByName("java-springboot-headless.jvm-test.svc.cluster.local")
-        StringBuilder s = new StringBuilder("Hello World!\n\nMy peers are:\n")
+        InetAddress[] peers;
+        try {
+            peers = InetAddress.getAllByName("java-springboot-headless.jvm-test.svc.cluster.local");
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        StringBuilder s = new StringBuilder("Hello World!\n\nMy peers are:\n");
 
         for(int i = 0; i < peers.length; i++) {
             s.append("    " + peers[i].getHostAddress() + "\n");
