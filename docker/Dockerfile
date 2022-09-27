@@ -21,8 +21,9 @@ COPY src src
 RUN mvn package -Dmaven.test.skip=true
 
 FROM ubi8/openjdk-11
+USER 0 
 RUN microdnf install -y bindutils
 COPY --from=0 /build/target/demo-0.0.1-SNAPSHOT.jar /app/target/demo-0.0.1-SNAPSHOT.jar
-
+USER 1001
 EXPOSE 8081
 ENTRYPOINT [ "java", "-jar", "/app/target/demo-0.0.1-SNAPSHOT.jar", "--server.port=8081" ]
