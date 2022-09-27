@@ -15,20 +15,25 @@ public class DemoApplication {
 
     @RequestMapping("/")
     String home() {
-        InetAddress[] peers;
+        InetAddress[] peers = null;
         try {
             peers = InetAddress.getAllByName("java-springboot-headless.jvm-test.svc.cluster.local");
         } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("Host not found.  Skipping peer section.");
         }
-        StringBuilder s = new StringBuilder("Hello World!\n\nMy peers are:\n");
+        
+        StringBuilder s = new StringBuilder("Hello World!\n\n");
+        
+        if (peers != null) {
+            s.append("My peers are:\n");
 
-        for(int i = 0; i < peers.length; i++) {
-            s.append("    " + peers[i].getHostAddress() + "\n");
+
+            for(int i = 0; i < peers.length; i++) {
+                s.append("    " + peers[i].getHostAddress() + "\n");
+            }
+
+            s.append("\n\n");
         }
-
-        s.append("\n\n");
 
         return s.toString();
     }
